@@ -1,10 +1,10 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
-//import { NavigationContainer } from '@react-navigation/native';
-//import { createStackNavigator } from '@react-navigation/stack';
-//import MainContainer from './navigation/MainContainer';
+import { StyleSheet, Text, View, Button, Image, FlatList } from 'react-native';
+import MainContainer from './navigation/MainContainer';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // First Screen, will have buttons
 const HomePage = () => {
@@ -19,15 +19,19 @@ const HomePage = () => {
       <View style={styles.bodyContainer}>
         <Text style={styles.bodyText}>
           Welcome to Kitty Munches! Treat your pet to some veterinarian approved home made cat food using our recipes! Select the Recipes button to see available recipes or select the Profile button to see your profile.
+          {'\n'}
         </Text>
+        <Text style = {styles.warningText}>Warning: Making cat food at home is not for every cat parent! It is good for cats who have very specific allergies and/or cat parents who have the time and resources to give their cat(s) a balanced diet. The recipe below has a veterinarian formulated recipe. </Text> 
       </View>
+      <View style = {styles.warningContainer}>
+      <Text style = {styles.warningText}>  </Text> 
+    </View>
       <View style={styles.tapWrapper}>
         {/* Menu Screen Options */}
         <Text
-          onPress={() => alert('Recipes Button')} style={styles.tap}>Recipes</Text>
+          onPress={() => alert('Recipes Button')} style={styles.tap}>Recipe</Text>
         <Text onPress={() => alert('Profile Button')} style={styles.tapProfile}> Profile </Text>
       </View>
-      <StatusBar style="auto" />
     </View>
   );
 }
@@ -36,6 +40,7 @@ const HomePage = () => {
 // Second Screen (Will have profile information)
 const UserProfile = () => {
   return (
+  <View style = {styles.container}> 
     <View style={styles.userContainer}>
       <View style={styles.messageBox}>
         <Text style={styles.topHeaderText}> Profile </Text>
@@ -53,6 +58,7 @@ const UserProfile = () => {
         <Text style = {styles.levelText}> Recipes Created: 1</Text>
       </View>
     </View>
+    </View>
   )
 }
 
@@ -60,7 +66,51 @@ const UserProfile = () => {
 
 //Third Screen
 const Recipes = () => {
-  
+  return(
+  <View style = {styles.container}> 
+  <View style = {styles.userContainer}>
+    <View style = {styles.messageBox}> 
+      <Text style = {styles.topRecipeText}> Cooked Rabbit and Poultry Recipe</Text>
+    </View>
+
+    <View style = {styles.ingredientContainer}>
+      <Text style = {styles.ingredientsHeaderText}> Ingredients </Text> 
+    <FlatList
+        data={[
+          {key: ''},
+          {key: '2lbs whole rabbit'},
+          {key: '1lbs boneless chicken'},
+          {key: '1 cup of water'},
+          {key: '2 eggs'},
+          {key: '10,000mg of fish oil'},
+          {key: '400 IU vitamin E'},
+          {key: '50 mg vitaming B complex'},
+          {key: '2,000 mg taurine'},
+          {key: '1 tsp iodized salt'},
+
+        ]}
+        renderItem={({item}) => <Text style={styles.ingredientText}>{item.key}</Text>}
+      />
+    </View> 
+    <View style = {styles.instructionsContainer}>
+    <Text style = {styles.ingredientsHeaderText}> Instructions </Text> 
+    <FlatList
+        data={[
+          {key: 'Grind rabbit and chop chicken into chunks'},
+          {key: 'Bake chicken at 350F for 15 minutes'},
+          {key: 'Combine and mix dry supplements into bowl'},
+          {key: 'Whisk the fish oil, egg yolks, and water'},
+          {key: 'Put ground mixture into the whisked ingredients'},
+        ]}
+      renderItem = {({item}) => <Text style = {styles.instructionsText}> {item.key}</Text> }
+      />
+    </View>
+    <View foodImageContainer>
+        <Image source = {require('../RecipeApplication/assets/cat_food.jpg')} style = {{width: 90, height: 180, alignSelf: 'center', marginTop: 60}} />
+    </View> 
+  </View>
+  </View> 
+  )
 }
 
 
@@ -68,38 +118,53 @@ const Recipes = () => {
 
 export default function App() {
   return (
-    <UserProfile />
+    <MainContainer />
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: 1600,
     backgroundColor: '#FA95F6',
     justifyContent: 'center',
   },
   bodyContainer: {
     backgroundColor: '#F14BEA',
     justifyContent: 'center',
-    marginTop: 60,
-    flex: 0.3
+    marginTop: 50,
+    flex: 0.8,
+
   },
   bodyText: {
     alignSelf: 'center',
     color: '#fff',
-    fontFamily: 'sans-serif',
-    fontSize: 16
+
+    fontSize: 16,
+    marginLeft: 20,
+    marginRight: 20,
+
+  },
+  warningText: {
+    alignSelf: 'center',
+    color: '#fff',
+
+    fontSize: 12,
+    marginLeft: 20,
+    marginRight: 20,
+
   },
   headerText: {
     color: '#fff',
-    fontSize: 50,
+    fontSize: 40,
     alignSelf: 'center',
-    fontFamily: 'sans-serif',
+
+    marginTop: 40
   },
   tapWrapper: {
     flex: 1,
-    marginTop: 0,
-    marginBottom: 30,
+    marginTop: 10,
+    marginBottom: 160,
     flexDirection: 'row',
     alignSelf: 'center',
     flexWrap: 'wrap'
@@ -109,7 +174,8 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     alignSelf: 'center',
-    margin: 30,
+    margin: 15,
+    marginTop: 180,
     color: '#fff',
     lineHeight: 150,
     textAlign: 'center',
@@ -121,6 +187,7 @@ const styles = StyleSheet.create({
     height: 150,
     alignSelf: 'center',
     margin: 15,
+    marginTop: 180,
     color: '#fff',
     lineHeight: 150,
     textAlign: 'center',
@@ -130,12 +197,22 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 50,
     alignSelf: 'center',
-    fontFamily: 'sans-serif'
+
+  },
+  topRecipeText: {
+    color: '#fff',
+    fontSize: 25,
+    alignSelf: 'center',
+
+    marginTop: 15,
+    marginLeft: 20,
+    marginRight: 20,
+    marginBottom: 15
   },
   messageBox: {
     backgroundColor: '#F41CEA',
     width: 1600,
-    paddingTop: 0,
+    paddingTop: 25,
     paddingBottom: 20,
     paddingLeft: 20,
     paddingRight: 20,
@@ -144,7 +221,8 @@ const styles = StyleSheet.create({
   },
   userContainer: {
     flex: 1,
-    backgroundColor: '#FA95F6', // #DAF7A6 #CBC3E3
+    marginTop: 20,
+    backgroundColor: '#FA95F6', 
   },
   contactContainer: {
     alignContent: 'center',
@@ -153,30 +231,65 @@ const styles = StyleSheet.create({
   contactText: {
     alignSelf: 'center',
     color: '#fff',
-    fontFamily: 'sans-serif',
+
     fontSize: 20
   },
   profileContainer: {
-    marginTop: 10
+    marginTop: 70,
+    marginBottom: 15
   },
   levelContainer: {
-    marginTop: 50,
+    marginTop: 110,
     backgroundColor: '#F57CF0',
     alignContent: 'center',
-    flex: 0.5
+    height: 150
   },
   levelHeaderText: {
     color: "#fff",
     alignSelf: 'center',
-    marginTop: 25,
+    marginTop: 15,
     fontSize: 30,
-    fontFamily: 'sans-serif'
+    marginBottom: 8
+
+  },
+  ingredientsHeaderText: {
+    color: "#fff",
+    alignSelf: 'center',
+    marginTop: 15,
+    fontSize: 30,
+    marginBottom: 0
+
   },
   levelText:{
     color: "#fff",
     alignSelf: 'center',
     fontSize: 15,
-    fontFamily: 'sans-serif',
+
     marginTop: 10
+  },
+  ingredientContainer: {
+    backgroundColor: '#F571EF',
+    flex: 0.47
+  }, 
+  ingredientText: {
+    color: "#fff",
+    font: 30,
+    textAlign: 'center',
+    marginLeft: 15
+  }, 
+  instructionsContainer: {
+    marginTop: 0,
+    backgroundColor: '#F57CF0',
+    flex: 0.38
+  }, 
+  instructionsText: {
+    color: "#fff",
+    font: 30,
+    textAlign: 'center',
+    marginLeft: 15
+  },
+  foodImageContainer: {
+    marginBottom: 15,
+    marginTop: 40
   }
 });
