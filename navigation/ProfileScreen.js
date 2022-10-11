@@ -142,11 +142,11 @@ const styles = StyleSheet.create({
       fontSize: 20
     },
     profileContainer: {
-      marginTop: 70,
+      marginTop: 40,
       marginBottom: 15
     },
     levelContainer: {
-      marginTop: 110,
+      marginTop: 40,
       backgroundColor: '#F57CF0',
       alignContent: 'center',
       height: 150

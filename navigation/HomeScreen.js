@@ -45,15 +45,14 @@ const styles = StyleSheet.create({
   bodyContainer: {
     backgroundColor: '#F14BEA',
     justifyContent: 'center',
-    marginTop: 50,
-    flex: 0.8,
+    marginTop: 0,
+    flex: 8,
 
   },
   bodyText: {
-    alignSelf: 'center',
+    alignText: 'center',
     color: '#fff',
-
-    fontSize: 16,
+    fontSize: 20,
     marginLeft: 20,
     marginRight: 20,
 
@@ -76,8 +75,8 @@ const styles = StyleSheet.create({
   },
   tapWrapper: {
     flex: 1,
-    marginTop: 10,
-    marginBottom: 160,
+    marginTop: 0,
+    marginBottom: 300,
     flexDirection: 'row',
     alignSelf: 'center',
     flexWrap: 'wrap'
@@ -88,7 +87,7 @@ const styles = StyleSheet.create({
     height: 150,
     alignSelf: 'center',
     margin: 15,
-    marginTop: 180,
+    marginTop: 120,
     color: '#fff',
     lineHeight: 150,
     textAlign: 'center',
@@ -100,7 +99,7 @@ const styles = StyleSheet.create({
     height: 150,
     alignSelf: 'center',
     margin: 15,
-    marginTop: 180,
+    marginTop: 120,
     color: '#fff',
     lineHeight: 150,
     textAlign: 'center',

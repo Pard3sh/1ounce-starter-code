@@ -45,7 +45,7 @@ export default function RecipeScreen({navigation}){
       />
     </View>
     <View foodImageContainer>
-        <Image source = {require('../assets/cat_food.jpg')} style = {{width: 90, height: 180, alignSelf: 'center', marginTop: 60}} />
+        
     </View> 
   </View>
   </View> 
