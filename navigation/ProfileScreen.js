@@ -13,7 +13,7 @@ export default function ProfileScreen({navigation}){
           <Text style={styles.topHeaderText}> Profile </Text>
         </View>
         <View style = {styles.profileContainer}>
-          <Image source={require('../RecipeApplication/assets/profile-icon.png')} style={{ width: 150, height: 150, alignSelf: 'center' }}/> 
+          <Image source={require('../assets/profile-icon.png')} style={{ width: 150, height: 150, alignSelf: 'center' }}/> 
         </View> 
         <View style = {styles.contactContainer}>  
           <Text style = {styles.contactText}> Name: Pardesh Dhakal </Text>

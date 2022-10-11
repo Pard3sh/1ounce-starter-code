@@ -1,4 +1,3 @@
-import 'react-native-gesture-handler';
 import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Image, FlatList } from 'react-native';
@@ -38,7 +37,9 @@ export default function MainContainer(){
             })}> 
 
             <Tab.Screen name={homeName} component = {HomeScreen}/>
-            
+            <Tab.Screen name={recipeName} component = {RecipeScreen}/>
+            <Tab.Screen name={profileName} component = {ProfileScreen}/>
+
 
         </Tab.Navigator>
         </NavigationContainer>
